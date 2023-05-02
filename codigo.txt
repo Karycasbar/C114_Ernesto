@@ -1,0 +1,46 @@
+#Importar tokenizer y pad_sequences de tensorflow.
+
+import tensorflow as tf
+
+from tensorflow.keras.preprocessing.text import Tokenizer
+
+#Definir parámetros para tokenizer.
+
+vocab_size = 10000
+embedding_dim = 16
+oov_tok = "<OOV>"
+training_size = 20000
+
+tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_tok)
+tokenizer.fit_on_texts(training_sentences)
+
+#Crear un diccionario word_index.
+
+word_index = tokenizer.word_index
+
+#Verificar el valor numérico asignado a una palabra.
+
+word_index["the"]
+
+-----------------------------------------------------------------
+training_sequences = tokenizer.texts_to_sequences(training_sentences)
+
+print(training_sequences[0])
+print(training_sequences[1])
+print(training_sequences[2])
+
+--------------------------------------------------------------------------
+
+#Definir parámetros para pad_sequences.
+
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+
+padding_type='post'
+max_length = 100
+trunc_type='post'
+
+
+training_padded = pad_sequences(training_sequences, maxlen=max_length, 
+                                padding=padding_type, truncating=trunc_type)
+
+training_padded
